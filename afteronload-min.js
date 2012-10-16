@@ -1,0 +1,1 @@
+afterOnLoad=function(e){var t=function(t){if(typeof e.addEventListener!="undefined")e.addEventListener("load",t,!1);else if(typeof e.attachEvent!="undefined")e.attachEvent("onload",t);else{var n=e.onload;typeof n!="function"?e.onload=t:e.onload=function(e){n(e),t(e)}}},n=!1;return t(function(){n=!0}),function(e){n?e():t(e)}}(window)
