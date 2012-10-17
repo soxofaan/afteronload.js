@@ -1,3 +1,9 @@
+// AfterOnLoad.js
+// Copyright (C) 2012 Stefaan Lippens
+// JavaScript snippet for queueing functions
+// to be triggered on/after the window load event.
+
+
 
 // Generate the afterOnload function with a closure.
 // Note that we use function arguments for attributes
