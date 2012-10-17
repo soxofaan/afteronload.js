@@ -1,25 +1,28 @@
 
-
-afterOnLoad = (function(window) {
+// Generate the afterOnload function with a closure.
+// Note that we use function arguments for attributes
+// like window.addEventListener, window.onload, so that
+// JavaScript minification can be more efficient.
+afterOnLoad = (function(window, onload, addEventListener, attachEvent, function_) {
 
 	// Best effort cross platform adder for window.onload handlers.
 	var addOnLoadHandler = function(f) {
-		if (typeof window.addEventListener != "undefined") {
+		if (typeof window[addEventListener] === function_) {
 			// The common way in Firefox, Webkit, Opera, ...
-			window.addEventListener("load", f, false);
+			window[addEventListener]("load", f, false);
 		}
-		else if (typeof window.attachEvent != "undefined") {
+		else if (typeof window[attachEvent] === function_) {
 			// The IE way.
-			window.attachEvent("onload", f);
+			window[attachEvent](onload, f);
 		}
 		else {
 			// Fall back on lame function chaining.
-			var originalWindowOnload = window.onload;
-			if (typeof originalWindowOnload !== "function") {
-				window.onload = f;
+			var originalWindowOnload = window[onload];
+			if (typeof originalWindowOnload !== function_) {
+				window[onload] = f;
 			}
 			else {
-				window.onload = function (event) {
+				window[onload] = function (event) {
 					originalWindowOnload(event);
 					f(event);
 				};
@@ -45,4 +48,4 @@ afterOnLoad = (function(window) {
 		}
 	});
 
-})(window);
+})(window, 'onload', 'addEventListener', 'attachEvent', 'function');
