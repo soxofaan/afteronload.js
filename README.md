@@ -54,7 +54,7 @@ function zazalo() {
     alert('We are after onload now.')
 }
 
-afterOnLoad(zazzalo);
+afterOnLoad(zazalo);
 ```
 
 Licence
