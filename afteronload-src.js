@@ -11,47 +11,45 @@
 // JavaScript minification can be more efficient.
 afterOnLoad = (function(window, onload, addEventListener, attachEvent, function_) {
 
-	// Best effort cross platform adder for window.onload handlers.
-	var addOnLoadHandler = function(f) {
-		if (typeof window[addEventListener] === function_) {
-			// The common way in Firefox, Webkit, Opera, ...
-			window[addEventListener]("load", f, false);
-		}
-		else if (typeof window[attachEvent] === function_) {
-			// The IE way.
-			window[attachEvent](onload, f);
-		}
-		else {
-			// Fall back on lame function chaining.
-			var originalWindowOnload = window[onload];
-			if (typeof originalWindowOnload !== function_) {
-				window[onload] = f;
-			}
-			else {
-				window[onload] = function (event) {
-					originalWindowOnload(event);
-					f(event);
-				};
-			}
-		}
-	};
-
 	// Internal housekeeping of "is window loaded?".
 	var windowLoaded = false;
 
-	// Set up onload handler to toggle our internal "is window loaded?" boolean.
-	addOnLoadHandler(function() {
-		windowLoaded = true;
-	});
-
-	// Return the afterOnloadFunction
-	return (function(f) {
+	var afterOnLoadImplementation = function(f) {
+		// Queue on load event or fire immediately?
 		if (windowLoaded) {
 			f();
 		}
 		else {
-			addOnLoadHandler(f);
+			// Best effort cross platform adder for window.onload handlers.
+			if (typeof window[addEventListener] === function_) {
+				// The common way in Firefox, Webkit, Opera, ...
+				window[addEventListener]("load", f, false);
+			}
+			else if (typeof window[attachEvent] === function_) {
+				// The IE way.
+				window[attachEvent](onload, f);
+			}
+			else {
+				// Fall back on lame function chaining.
+				var originalWindowOnload = window[onload];
+				if (typeof originalWindowOnload !== function_) {
+					window[onload] = f;
+				}
+				else {
+					window[onload] = function (event) {
+						originalWindowOnload(event);
+						f(event);
+					};
+				}
+			}
 		}
+	};
+
+	// Set up onload handler to toggle our internal "is window loaded?" boolean.
+	afterOnLoadImplementation(function() {
+		windowLoaded = true;
 	});
+
+	return afterOnLoadImplementation;
 
 })(window, 'onload', 'addEventListener', 'attachEvent', 'function');
