@@ -54,7 +54,7 @@ It's just too small to be loaded as a separate script file.
 Just copy the minified snippet in your bootstrap code:
 
 ```javascript
-afterOnLoad=function(e,t,n,r,i){var s=!1,o=function(o){if(s)o();else if(typeof e[n]===i)e[n]("load",o,!1);else if(typeof e[r]===i)e[r](t,o);else{var u=e[t];typeof u!==i?e[t]=o:e[t]=function(e){u(e),o(e)}}};return o(function(){s=!0}),o}(window,"onload","addEventListener","attachEvent","function");
+afterOnLoad=function(e,t,n,r,i){var s=!1,o=function(o){if(s)o();else if(typeof e[n]===i)e[n]("load",o,!1);else if(typeof e[r]===i)e[r](t,o);else{var u=e[t];e[t]=typeof u!==i?o:function(e){u(e),o(e)}}};return o(function(){s=!0}),o}(window,"onload","addEventListener","attachEvent","function");
 ```
 And optionally change the function name to suit your needs.
 

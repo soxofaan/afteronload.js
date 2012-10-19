@@ -32,15 +32,10 @@ afterOnLoad = (function(window, onload, addEventListener, attachEvent, function_
 			else {
 				// Fall back on lame function chaining.
 				var originalWindowOnload = window[onload];
-				if (typeof originalWindowOnload !== function_) {
-					window[onload] = f;
-				}
-				else {
-					window[onload] = function (event) {
-						originalWindowOnload(event);
-						f(event);
-					};
-				}
+				window[onload] = (typeof originalWindowOnload !== function_) ? f : (function (event) {
+					originalWindowOnload(event);
+					f(event);
+				});
 			}
 		}
 	};
