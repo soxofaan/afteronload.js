@@ -51,7 +51,7 @@ Queue one or more functions as follows:
 
 ```javascript
 function zazalo() {
-    alert('We are after onload now.')
+    alert('We are after onload now.');
 }
 
 afterOnLoad(zazalo);
