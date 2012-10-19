@@ -1,0 +1,39 @@
+
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 10pt;
+	margin: 0;
+	padding: 0;
+}
+
+iframe {
+	width: 420px;
+	height: 200px;
+	display: inline;
+	margin: 1em 0 0 1em;
+	border: 1px solid #CCC;
+}
+
+#results {
+	width: 400px;
+	margin: 2em auto;
+	background-color: #EEE;
+	padding: 0.2em;
+}
+
+#results.fail {
+	background-color: #F44;
+}
+
+#results .assert {
+	margin: 0.2em;
+	padding: 0.2em 0.5em;
+}
+
+#results .assert-pass {
+	background-color: #8F8;
+}
+
+#results .assert-fail {
+	background-color: #F88;
+}

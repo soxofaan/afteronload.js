@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>afterOnLoad.js test</title>
+    <link href="test.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<div id="results"></div>
+<script type="text/javascript" src="test.js"></script>
+
+<script type="text/javascript" src="../afteronload-min.js"></script>
+
+<script type="text/javascript">
+var x = 1001;
+
+assertEqual(x, 1001, 'Initial value of x should be 1001');
+
+afterOnLoad(function() {
+	assertEqual(x, 1001, 'After onload, but before change: x should still be 1001');
+});
+
+afterOnLoad(function() {
+	x = 1002;
+});
+
+afterOnLoad(function() {
+	assertEqual(x, 1002, 'After onload and after change: x should be 1002');
+});
+
+assertEqual(x, 1001, 'Value after queuing calls should still be 1001');
+</script>
+
+</body>
+</html>

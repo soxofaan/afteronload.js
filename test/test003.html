@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>afterOnLoad.js test</title>
+    <link href="test.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+<div id="results"></div>
+<script type="text/javascript" src="test.js"></script>
+
+
+<script type="text/javascript">
+window.onload = function() {
+	x = 3003;
+};
+</script>
+
+
+<script type="text/javascript" src="../afteronload-min.js"></script>
+
+<script type="text/javascript">
+var x = 3001;
+assertEqual(x, 3001, 'Initial value of x should be 3001');
+
+afterOnLoad(function() {
+	assertEqual(x, 3003, 'After onload and after window.onload change: x should be 3003');
+});
+
+</script>
+
+</body>
+</html>
