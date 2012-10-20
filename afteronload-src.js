@@ -15,6 +15,11 @@ afterOnLoad = (function(window, onload, addEventListener, attachEvent, function_
 	var windowLoaded = false;
 
 	var afterOnLoadImplementation = function(f) {
+
+		// Original window.onload function.
+		// Minification is more efficient if we define it here instead of just before we need it.
+		var originalWindowOnload = window[onload];
+
 		// Queue on load event or fire immediately?
 		if (windowLoaded) {
 			f();
@@ -31,7 +36,6 @@ afterOnLoad = (function(window, onload, addEventListener, attachEvent, function_
 			}
 			else {
 				// Fall back on lame function chaining.
-				var originalWindowOnload = window[onload];
 				window[onload] = (typeof originalWindowOnload !== function_) ? f : (function (event) {
 					originalWindowOnload(event);
 					f(event);
