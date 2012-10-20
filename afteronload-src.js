@@ -9,7 +9,7 @@
 // Note that we use function arguments for attributes
 // like window.addEventListener, window.onload, so that
 // JavaScript minification can be more efficient.
-afterOnLoad = (function(window, onload, addEventListener, attachEvent, function_) {
+afterOnLoad = (function(window, onload, addEventListener, attachEvent) {
 
 	// Internal housekeeping of "is window loaded?".
 	var windowLoaded = false;
@@ -26,20 +26,20 @@ afterOnLoad = (function(window, onload, addEventListener, attachEvent, function_
 		}
 		else {
 			// Best effort cross platform adder for window.onload handlers.
-			if (typeof window[addEventListener] === function_) {
+			if  (window[addEventListener]) {
 				// The common way in Firefox, Webkit, Opera, ...
 				window[addEventListener]("load", f, false);
 			}
-			else if (typeof window[attachEvent] === function_) {
+			else if (window[attachEvent]) {
 				// The IE way.
 				window[attachEvent](onload, f);
 			}
 			else {
 				// Fall back on lame function chaining.
-				window[onload] = (typeof originalWindowOnload !== function_) ? f : (function (event) {
+				window[onload] = (originalWindowOnload ? (function (event) {
 					originalWindowOnload(event);
 					f(event);
-				});
+				}) : f);
 			}
 		}
 	};
@@ -51,4 +51,4 @@ afterOnLoad = (function(window, onload, addEventListener, attachEvent, function_
 
 	return afterOnLoadImplementation;
 
-})(window, 'onload', 'addEventListener', 'attachEvent', 'function');
+})(window, 'onload', 'addEventListener', 'attachEvent');
