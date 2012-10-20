@@ -27,5 +27,10 @@ afterOnLoad(function() {
 assertEqual(x, 2001, 'Value after queuing calls should still be 2001');
 </script>
 
+
+<script type="text/javascript">
+setTimeout(function() { assertEqual(x, 2002, 'After some time, x should finally be 2002');}, 1000);
+</script>
+
 </body>
 </html>
