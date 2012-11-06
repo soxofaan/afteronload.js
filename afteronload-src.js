@@ -6,10 +6,10 @@
 
 
 // Generate the afterOnload function with a closure.
-// Note that we use function arguments for attributes
-// like window.addEventListener, window.onload, so that
-// JavaScript minification can be more efficient.
-afterOnLoad = (function(window, onload, addEventListener, attachEvent) {
+afterOnLoad = (function(window) {
+
+	// Improve minification efficiency by using variables for some long attribute names/strings.
+	var onload = 'onload', addEventListener = 'addEventListener', attachEvent = 'attachEvent';
 
 	// Internal housekeeping of "is window loaded?".
 	var windowLoaded = false;
@@ -51,4 +51,4 @@ afterOnLoad = (function(window, onload, addEventListener, attachEvent) {
 
 	return afterOnLoadImplementation;
 
-})(window, 'onload', 'addEventListener', 'attachEvent');
+})(window);

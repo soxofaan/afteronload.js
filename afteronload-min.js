@@ -1,1 +1,1 @@
-afterOnLoad=function(e,t,n,r){var i=!1,s=function(s){var o=e[t];i?s():e[n]?e[n]("load",s,!1):e[r]?e[r](t,s):e[t]=o?function(e){o(e),s(e)}:s};return s(function(){i=!0}),s}(window,"onload","addEventListener","attachEvent")
+afterOnLoad=function(a){var b="onload",c="addEventListener",d="attachEvent",e=!1,f=function(f){var g=a[b];e?f():a[c]?a[c]("load",f,!1):a[d]?a[d](b,f):a[b]=g?function(a){g(a),f(a)}:f};return f(function(){e=!0}),f}(window)
