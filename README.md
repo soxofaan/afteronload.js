@@ -1,7 +1,7 @@
 AfterOnLoad.js
 ==============
 
-AfterOnLoad.js is a JavaScript snippet for queueing functions
+AfterOnLoad.js is a JavaScript snippet for queuing functions
 to be triggered on/after the window load event (aka ```window.onload```).
 
 When you are optimizing your page load times,
@@ -14,12 +14,12 @@ until after ```window.onload``` can help to improve the
 perceived loading speed of your pages.
 
 
-Desing/features
+Design/features
 ---------------
 
 AfterOnLoad.js has been designed with the following in mind:
 
-*   *Compact* and intended for *inline Javacript*.
+*   *Compact* and intended for *inline JavaScript*.
     The code is optimized for compact minification,
     so that the snippet can be added in an
     inline JavaScript block in your markup.
@@ -37,7 +37,7 @@ AfterOnLoad.js has been designed with the following in mind:
     or fall back on ```window.onload``` piggybacking?
     We've got it covered.
 
-*   Queueing *also works after the load event* has happened.
+*   Queuing *also works after the load event* has happened.
     If you call ```afterOnLoad(fun)``` after
     ```window.onload```, the function will be
     triggered immediately, as there is nothing to wait for.
